@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 
 equipos = """
 [
     {
-        "nombre": "Equipo 1",
+        "nombre": "equipo1",
         "integrantes": [
             {
                 "nombre": "N1",
@@ -46,5 +47,46 @@ equipos = """
 """
 
 # Create your views here.
-def verEquiposEndpoint(request):
+
+
+def verEquiposEndpoint(request):  # query parameter
+    if request.method == "GET":
+        # Es una peticion de tipo GET
+        # Obtenemos query parameter llamdo nombre
+        nombreFiltro = request.GET.get("nombre")
+        print(nombreFiltro)
+
+        # def filtro(equipo):
+        #     return equipo["nombre"].lower() == nombreFiltro       filtro, listaEquipos)
+
+        listaEquipos = json.loads(equipos)
+        listaEquiposFiltrada = list(
+            filter(
+                lambda x: x["nombre"].lower() == nombreFiltro,
+                listaEquipos
+            )
+        )
+        return HttpResponse(json.dumps(listaEquiposFiltrada))
+
+    return HttpResponse(equipos)
+
+
+def verEquiposPathParameterEndpoint(request, filtro):
+    if request.method == "GET":
+        # Es una peticion de tipo GET
+        # Obtenemos query parameter llamdo nombre
+        nombreFiltro = filtro
+
+        # def filtro(equipo):
+        #     return equipo["nombre"].lower() == nombreFiltro       filtro, listaEquipos)
+
+        listaEquipos = json.loads(equipos)
+        listaEquiposFiltrada = list(
+            filter(
+                lambda x: x["nombre"].lower() == nombreFiltro,
+                listaEquipos
+            )
+        )
+        return HttpResponse(json.dumps(listaEquiposFiltrada))
+
     return HttpResponse(equipos)
