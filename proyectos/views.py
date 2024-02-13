@@ -3,22 +3,24 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-usuarios = """
-[
-    {
-        "username": "usuario1",
-        "password": "123"
-    },
-    {
-        "username": "usuario2",
-        "password": "abc"
-    },
-    {
-        "username": "usuario3",
-        "password": "aaa"
-    }
-]
-"""
+from proyectos.models import Usuario
+
+# usuarios = """
+# [
+#     {
+#         "username": "usuario1",
+#         "password": "123"
+#     },
+#     {
+#         "username": "usuario2",
+#         "password": "abc"
+#     },
+#     {
+#         "username": "usuario3",
+#         "password": "aaa"
+#     }
+# ]
+# """
 
 equipos = """
 [
@@ -185,12 +187,12 @@ def loginPostJsonEndpoint(request):  # para data mas estructurda
         data = request.body
         usernameData = json.loads(data)
 
-    listaUsuarios = json.loads(usuarios)
-    listaUsuariosFiltrada = list(
-        filter(
-            lambda x: x["username"] == usernameData["username"] and x["password"] == usernameData["password"],
-            listaUsuarios
-        )
+    username = usernameData["username"]
+    password = usernameData["password"]
+
+    # interactuamos con base de datos mediante el modelo usuario
+    listaUsuariosFiltrada = Usuario.objects.filter(
+        username=username, password=password
     )
 
     if len(listaUsuariosFiltrada) > 0:
