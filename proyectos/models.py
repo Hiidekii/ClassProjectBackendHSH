@@ -21,6 +21,7 @@ class Equipo(models.Model):  # python manage.py makemigrations, python manage.py
         ("I", "Inactivo")
     )
     nombre = models.CharField(max_length=50)
+    anho = models.IntegerField(verbose_name="año", null=True)
     estado = models.CharField(max_length=1, choices=EQUIPO_ESTADO)
 
     def __str__(self):

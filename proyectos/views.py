@@ -74,18 +74,18 @@ def verEquiposEndpoint(request):  # query parameter
         # Es una peticion de tipo GET
         # Obtenemos query parameter llamdo nombre
         nombreFiltro = request.GET.get("nombre")
-        print(nombreFiltro)
+        anhoFiltro = request.GET.get("anho")
 
         # def filtro(equipo):
         #     return equipo["nombre"].lower() == nombreFiltro       filtro, listaEquipos)
 
-        if nombreFiltro == "":
+        if nombreFiltro == "" and anhoFiltro == "-":
             # no hay q filtrar nada
             listaEquiposFiltrada = Equipo.objects.all()
         else:
             # si ha envado filtro
             listaEquiposFiltrada = Equipo.objects.filter(
-                nombre__contains=nombreFiltro)
+                nombre__contains=nombreFiltro, anho=anhoFiltro)
 
         dataResponse = []
         for equipo in listaEquiposFiltrada:
