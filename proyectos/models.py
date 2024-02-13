@@ -15,7 +15,7 @@ class Usuario(models.Model):
         return self.username
 
 
-class Equipo(models.Model):
+class Equipo(models.Model):  # python manage.py makemigrations, python manage.py migrate
     EQUIPO_ESTADO = (
         ("A", "Activo"),
         ("I", "Inactivo")
