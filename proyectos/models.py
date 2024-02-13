@@ -13,3 +13,15 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class Equipo(models.Model):
+    EQUIPO_ESTADO = (
+        ("A", "Activo"),
+        ("I", "Inactivo")
+    )
+    nombre = models.CharField(max_length=50)
+    estado = models.CharField(max_length=1, choices=EQUIPO_ESTADO)
+
+    def __str__(self):
+        return self.nombre
