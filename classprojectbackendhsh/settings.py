@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-#CORS: https://pypi.org/project/django-cors-headers/
+# CORS: https://pypi.org/project/django-cors-headers/
 
 # Application definition
 
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders'
+    'corsheaders',
+    'proyectos.apps.ProyectosConfig'
 ]
 
 MIDDLEWARE = [

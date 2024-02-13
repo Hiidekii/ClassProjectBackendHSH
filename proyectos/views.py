@@ -143,7 +143,7 @@ def loginEndpoint(request, username, password):
 
 # Path: /proyectos/login POST
 @csrf_exempt
-def loginPostEndpoint(request):
+def loginPostEndpoint(request):  # formulario multipart para data pequeña o texto
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -180,7 +180,7 @@ def loginPostEndpoint(request):
 #   "msg": ""
 # }
 @csrf_exempt
-def loginPostJsonEndpoint(request):
+def loginPostJsonEndpoint(request):  # para data mas estructurda
     if (request.method == "POST"):
         data = request.body
         usernameData = json.loads(data)
